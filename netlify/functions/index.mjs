@@ -1,4 +1,4 @@
-const finnhub = require("finnhub");
+import finnhub from "finnhub";
 
 const api_key = finnhub.ApiClient.instance.authentications["api_key"];
 api_key.apiKey = "cm5em7pr01qjc6l4b2tgcm5em7pr01qjc6l4b2u0";
@@ -16,13 +16,12 @@ const quote = async function (symbl) {
   });
 };
 
-exports.handler = async () => {
-  const data = await quote("AAPL");
-  const str = `this is the opening price=${data?.o}`;
-  return {
-    statusCode: 200,
-    body: str,
-  };
+export default async (req) => {
+  const { next_run } = await req.json();
+
+  console.log("Received event! Next invocation at:", next_run);
 };
 
-exports.handler();
+export const config = {
+  schedule: "@daily",
+};
