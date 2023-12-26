@@ -18,9 +18,10 @@ const quote = async function (symbl) {
 
 exports.handler = async () => {
   const data = await quote("AAPL");
+  const str = `this is the opening price=${data?.o}`;
   return {
     statusCode: 200,
-    body: data?.o,
+    body: str,
   };
 };
 
