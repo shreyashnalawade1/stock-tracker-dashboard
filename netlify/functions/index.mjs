@@ -104,7 +104,7 @@ export const handler = async () => {
       let curQuery = `INSERT INTO [dbo].[time_series] VALUES ('${ticker}','${date}',${data?.o},${data?.c},${data?.h},${data?.l});`;
       await sql.query(curQuery);
       console.log("Done", ticker);
-      await sleep(500);
+      await sleep(100);
     }
     return {
       statusCode: 200,
