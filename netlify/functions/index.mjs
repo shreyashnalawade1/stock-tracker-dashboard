@@ -66,9 +66,9 @@ const date = `${curDate.getFullYear()}-${
   curDate.getMonth() + 1
 }-${curDate.getDate()}`;
 
-const server = "development";
-const database = "competitor-price-analysis.database.windows.net";
-const port = "competitor-analysis";
+const server = "competitor-price-analysis.database.windows.net";
+const database = "competitor-analysis";
+const port = 1433;
 const user = "root-";
 const password = "foxiscoming123@";
 
