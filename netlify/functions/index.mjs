@@ -79,6 +79,7 @@ const sqlConfig = {
   user,
   password,
   options: {
+    database,
     encrypt: true,
   },
 };
@@ -96,16 +97,18 @@ const quote = async function (symbl) {
   );
 };
 
-export const handler = async () => {
+export const handler = async (req) => {
   try {
     await sql.connect(sqlConfig);
-    for (const ticker of tickers) {
-      const data = await quote(ticker);
-      let curQuery = `INSERT INTO [dbo].[time_series] VALUES ('${ticker}','${date}',${data?.o},${data?.c},${data?.h},${data?.l});`;
-      await sql.query(curQuery);
-      console.log("Done", ticker);
-      await sleep(100);
-    }
+    // for (const ticker of tickers) {
+    const reqData = req.queryStringParameters;
+    const ticker = reqData.ticker;
+    const data = await quote(ticker);
+    let curQuery = `INSERT INTO [dbo].[time_series] VALUES ('${ticker}','${date}',${data?.o},${data?.c},${data?.h},${data?.l});`;
+    sql.query(curQuery);
+    console.log("Done", ticker);
+    await sleep(500);
+    // }
     return {
       statusCode: 200,
       body: "sync complete",
