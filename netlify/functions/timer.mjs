@@ -54,7 +54,9 @@ const tickers = [
 export default async (req) => {
   const { next_run } = await req.json();
   for (const ticker of tickers) {
-    fetch(`http://localhost:8888/.netlify/functions/index?ticker=${ticker}`);
+    fetch(
+      `https://master--jade-cupcake-23e25c.netlify.app/.netlify/functions/index?ticker=${ticker}`
+    );
   }
 };
 
