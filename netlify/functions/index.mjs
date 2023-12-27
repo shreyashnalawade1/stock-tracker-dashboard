@@ -1,6 +1,5 @@
 import finnhub from "finnhub";
 import sql from "mssql";
-import dotenv from "dotenv";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -67,13 +66,11 @@ const date = `${curDate.getFullYear()}-${
   curDate.getMonth() + 1
 }-${curDate.getDate()}`;
 
-dotenv.config({ path: ".env.development" });
-
-const server = process.env.AZURE_SQL_SERVER;
-const database = process.env.AZURE_SQL_DATABASE;
-const port = parseInt(process.env.AZURE_SQL_PORT);
-const user = process.env.AZURE_SQL_USER;
-const password = process.env.AZURE_SQL_PASSWORD;
+const server = "development";
+const database = "competitor-price-analysis.database.windows.net";
+const port = "competitor-analysis";
+const user = "root-";
+const password = "foxiscoming123@";
 
 const sqlConfig = {
   server,
