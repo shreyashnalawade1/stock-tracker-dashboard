@@ -1,10 +1,6 @@
 import finnhub from "finnhub";
 import sql from "mssql";
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 const api_key = finnhub.ApiClient.instance.authentications["api_key"];
 api_key.apiKey = "cm5em7pr01qjc6l4b2tgcm5em7pr01qjc6l4b2u0";
 
@@ -62,10 +58,11 @@ const tickers = [
 ];
 
 const curDate = new Date();
-const date = `${curDate.getFullYear()}-${
-  curDate.getMonth() + 1
-}-${curDate.getDate()}`;
+const date = `${curDate.getFullYear()}-${curDate.getMonth() + 1}-${
+  curDate.getDate() - 1
+}`;
 
+console.log(date);
 const server = "competitor-price-analysis.database.windows.net";
 const database = "competitor-analysis";
 const port = 1433;
@@ -106,9 +103,9 @@ export const handler = async (req) => {
     const data = await quote(ticker);
     let curQuery = `INSERT INTO [dbo].[time_series] VALUES ('${ticker}','${date}',${data?.o},${data?.c},${data?.h},${data?.l});`;
     sql.query(curQuery);
+    console.log(date);
     console.log("Done", ticker);
-    await sleep(500);
-    // }
+
     return {
       statusCode: 200,
       body: "sync complete",

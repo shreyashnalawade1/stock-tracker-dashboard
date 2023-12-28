@@ -51,12 +51,17 @@ const tickers = [
   "XOM",
 ];
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export default async (req) => {
   const { next_run } = await req.json();
   for (const ticker of tickers) {
     fetch(
       `https://master--jade-cupcake-23e25c.netlify.app/.netlify/functions/index?ticker=${ticker}`
     );
+    await sleep(70);
   }
 };
 
