@@ -61,6 +61,7 @@ export default async (req) => {
     fetch(
       `https://master--jade-cupcake-23e25c.netlify.app/.netlify/functions/index?ticker=${ticker}`
     );
+
     await sleep(80);
   }
 };

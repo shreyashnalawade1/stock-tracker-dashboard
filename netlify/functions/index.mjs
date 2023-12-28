@@ -4,59 +4,6 @@ import sql from "mssql";
 const api_key = finnhub.ApiClient.instance.authentications["api_key"];
 api_key.apiKey = "cm5em7pr01qjc6l4b2tgcm5em7pr01qjc6l4b2u0";
 
-const tickers = [
-  "AAPL",
-  "ABBV",
-  "ABT",
-  "ACN",
-  "ADBE",
-  "AMD",
-  "AMZN",
-  "AVGO",
-  "BAC",
-  "BRK.B",
-  "CAT",
-  "CMCSA",
-  "COST",
-  "CRM",
-  "CSCO",
-  "CVX",
-  "DHR",
-  "DIS",
-  "GOOG",
-  "GOOGL",
-  "HD",
-  "INTC",
-  "INTU",
-  "JNJ",
-  "JPM",
-  "KO",
-  "LIN",
-  "LLY",
-  "MA",
-  "MCD",
-  "META",
-  "MRK",
-  "MSFT",
-  "NFLX",
-  "NKE",
-  "NVDA",
-  "ORCL",
-  "PEP",
-  "PFE",
-  "PG",
-  "QCOM",
-  "TMO",
-  "TSLA",
-  "TXN",
-  "UNH",
-  "V",
-  "VZ",
-  "WFC",
-  "WMT",
-  "XOM",
-];
-
 const curDate = new Date();
 const date = `${curDate.getFullYear()}-${curDate.getMonth() + 1}-${
   curDate.getDate() - 1
@@ -96,7 +43,6 @@ const quote = async function (symbl) {
 export const handler = async (req) => {
   try {
     await sql.connect(sqlConfig);
-    // for (const ticker of tickers) {
     const reqData = req.queryStringParameters;
     const ticker = reqData.ticker;
     const data = await quote(ticker);
@@ -118,10 +64,3 @@ export const handler = async (req) => {
     };
   }
 };
-// export default async (req) => {
-//   const { next_run } = await req.json();
-// };
-
-// export const config = {
-//   schedule: "@daily",
-// }
