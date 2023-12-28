@@ -49,7 +49,6 @@ export const handler = async (req) => {
     let curQuery = `INSERT INTO [dbo].[time_series] VALUES ('${ticker}','${date}',${data?.o},${data?.c},${data?.h},${data?.l});`;
     console.log(curQuery);
     const res = await sql.query(curQuery);
-    console.log(res);
     console.log("Done", ticker);
 
     return {
