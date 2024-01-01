@@ -4,10 +4,12 @@ import sql from "mssql";
 const api_key = finnhub.ApiClient.instance.authentications["api_key"];
 api_key.apiKey = "cm5em7pr01qjc6l4b2tgcm5em7pr01qjc6l4b2u0";
 
-const curDate = new Date();
-const date = `${curDate.getFullYear()}-${curDate.getMonth() + 1}-${
-  curDate.getDate() - 1
-}`;
+const today = new Date();
+today.setDate(today.getDate() - 1);
+const date = `${today.getFullYear()}-${
+  today.getMonth() + 1
+}-${today.getDate()}`;
+
 
 const server = "competitor-price-analysis.database.windows.net";
 const database = "competitor-analysis";
